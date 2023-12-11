@@ -8,3 +8,11 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
+.logo{
+  position: fixed;
+  height: 32px;
+  width: auto;
+  padding-top: 16px;
+  padding-left: 12px;
+}

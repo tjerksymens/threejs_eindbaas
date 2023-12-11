@@ -4,6 +4,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Shoe } from './classes/Shoe.js';
+import { Configurator } from './classes/Configurator';
 
 const draco = new DRACOLoader();
 draco.setDecoderConfig({ type: 'js' });
@@ -36,15 +37,17 @@ const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(draco);
 
 // Shoe
-// Set up the GLTF model
 const shoe = new Shoe(scene);
+
+// Configurator
+const configurator = new Configurator(scene);
 
 // Lights
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
 scene.add(ambientLight);
 
 
-camera.position.z = 3;
+camera.position.z = 2;
 camera.position.y = 1;
 
 function animate() {

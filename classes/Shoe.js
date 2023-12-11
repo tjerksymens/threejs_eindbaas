@@ -17,7 +17,7 @@ export class Shoe {
     gltfLoader.setDRACOLoader(dracoLoader); // Set DRACOLoader instance
     
     gltfLoader.load("/models/shoe.glb", (gltf) => {
-      gltf.scene.position.set(0, 0, 0);
+      gltf.scene.position.set(0, 0.5, 0);
       gltf.scene.rotation.y = 1;
       gltf.scene.scale.set(6, 6, 6);
 

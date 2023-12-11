@@ -9,9 +9,17 @@
     <title>Configurator | SWEAR London</title>
   </head>
   <body>
+    <img class="logo" src="./public/images/SWEAR_Logo_landscape_white.webp" alt="Swear Logo">
     <div class="container">
       <div id="canvasContainer"></div>
-      <div class="configurator"></div>
+      <div class="configurator">
+        <h1>Customize your shoe</h1>
+        <label for="colorPicker">Select Color:</label>
+        <input type="color" id="colorPicker"/>
+        <button id="prevBtn">&lt;</button>
+        <span id="part">Inside</span>
+        <button id="nextBtn">&gt;</button>
+      </div>
     </div>
     
     <script type="module" src="/main.js"></script>
