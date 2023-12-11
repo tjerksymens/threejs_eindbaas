@@ -74,8 +74,8 @@ const directionalLightHelper = new THREE.DirectionalLightHelper(
   );
 scene.add(directionalLightHelper);
 
-camera.position.z = 2;
-camera.position.y = 1;
+camera.position.z = 1.5;
+camera.position.y = 0.7;
 
 function animate() {
 	requestAnimationFrame( animate );
