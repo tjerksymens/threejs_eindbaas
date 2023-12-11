@@ -14,11 +14,13 @@
       <div id="canvasContainer"></div>
       <div class="configurator">
         <h1>Customize your shoe</h1>
-        <label for="colorPicker">Select Color:</label>
+        <div class="part__picker">
+          <button class="btn btn--prev" id="prevBtn">&lt;</button>
+          <span class="part__text" id="part">Inside</span>
+          <button class="btn btn--next" id="nextBtn">&gt;</button>
+        </div>
+        <label for="colorPicker"></label>
         <input type="color" id="colorPicker"/>
-        <button id="prevBtn">&lt;</button>
-        <span id="part">Inside</span>
-        <button id="nextBtn">&gt;</button>
       </div>
     </div>
     
