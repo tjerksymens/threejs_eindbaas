@@ -47,6 +47,7 @@ export class Shoe {
     }
     // Set up casting shadows for meshes
     mesh.castShadow = true;
+    mesh.receiveShadow = true;
   }
   
 }
