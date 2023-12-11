@@ -22,8 +22,7 @@ renderer.setSize(canvasContainer.clientWidth, canvasContainer.clientHeight);
 renderer.shadowMap.enabled = true;
 canvasContainer.appendChild(renderer.domElement);
 
-// Controls
-const controls = new OrbitControls(camera, renderer.domElement);
+
 
 // Resize function.
 resize();
@@ -58,7 +57,7 @@ const ambientLight = new THREE.AmbientLight(0xffffff, 2.2);
 scene.add(ambientLight);
 
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-directionalLight.position.set(0, 2, 1);
+directionalLight.position.set(0, 2, 0);
 directionalLight.castShadow = true;
 scene.add(directionalLight);
 
@@ -67,15 +66,16 @@ directionalLight.shadow.mapSize.height = 1024;
 directionalLight.shadow.camera.near = 0.1;
 directionalLight.shadow.camera.far = 5;
 
-// add directional light helper
-const directionalLightHelper = new THREE.DirectionalLightHelper(
-    directionalLight, 
-    1
-  );
-scene.add(directionalLightHelper);
+const controls = new OrbitControls(camera, renderer.domElement);
+
+controls.enableDamping = true;
+controls.dampingFactor = 0.25;; 
+
+controls.target.set(0, 0.7, -0.5);
 
 camera.position.z = 1.5;
 camera.position.y = 0.7;
+
 
 function animate() {
 	requestAnimationFrame( animate );
