@@ -10,8 +10,8 @@ export class Configurator {
         'White': '#ffffff',
         'Black': '#222222',
         'Purple': '#a16d9a',
-        'Orange': '#f7704b',
         'Pink': '#edc1c2',
+        'Orange': '#f7704b',
         'Green': "#30db85",
         };
 
