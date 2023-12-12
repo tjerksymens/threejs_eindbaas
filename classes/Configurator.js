@@ -1,3 +1,5 @@
+import * as TWEEN from '@tweenjs/tween.js';
+
 export class Configurator {
     constructor(scene) {
         this.scene = scene;
@@ -62,38 +64,67 @@ export class Configurator {
 
     setCameraView(part) {
         const camera = this.scene.camera;
-
+    
+        const currentPosition = {
+            x: camera.position.x,
+            y: camera.position.y,
+            z: camera.position.z
+        };
+    
+        const targetPosition = {
+            x: 0,
+            y: 0.7,
+            z: -0.5
+        };
+    
         switch (part) {
-        case "outside_1":
-            camera.position.set(0, 0.7, 1.5);
-            camera.lookAt(0, 0.7, -0.5);
-            break;
-        case "outside_2":
-            camera.position.set(1, 1, -2);
-            camera.lookAt(0, 0.7, -0.5);
-            break;
-        case "outside_3":
-            camera.position.set(-1, 0.7, 1);
-            camera.lookAt(0, 0.7, -0.5);
-            break;
-        case "inside":
-            camera.position.set(-0.5, 1.5, 1);
-            camera.lookAt(0, 0.6, -0.2);
-            break;
-        case "laces":
-            camera.position.set(0.4, 1, 1);
-            camera.lookAt(0, 0.7, -0.5);
-            break;
-        case "sole_bottom":
-            camera.position.set(-1.7, 0.3, -0.5);
-            camera.lookAt(0, 0.7, -0.5);
-            break;
-        case "sole_top":
-            camera.position.set(-1, 0.5, 1.2);
-            camera.lookAt(0, 0.7, -0.5);
-            break;
-        }   
+            case "outside_1":
+                targetPosition.x = 0;
+                targetPosition.y = 0.7;
+                targetPosition.z = 1.5;
+                break;
+            case "outside_2":
+                targetPosition.x = -1.5;
+                targetPosition.y = 0.7;
+                targetPosition.z = 0.5;
+                break;
+            case "outside_3":
+                targetPosition.x = -1;
+                targetPosition.y = 0.7;
+                targetPosition.z = 1;
+                break;
+            case "inside":
+                targetPosition.x = -0.5;
+                targetPosition.y = 1.5;
+                targetPosition.z = 1;
+                break;
+            case "laces":
+                targetPosition.x = 0.4;
+                targetPosition.y = 1;
+                targetPosition.z = 1;
+                break;
+            case "sole_bottom":
+                targetPosition.x = -1.7;
+                targetPosition.y = 0.3;
+                targetPosition.z = -0.5;
+                break;
+            case "sole_top":
+                targetPosition.x = -1;
+                targetPosition.y = 0.5;
+                targetPosition.z = 1.2;
+                break;
+        } 
+    
+        const tween = new TWEEN.Tween(currentPosition)
+            .to(targetPosition, 500)
+            .easing(TWEEN.Easing.Quadratic.InOut)
+            .onUpdate(() => {
+                camera.position.set(currentPosition.x, currentPosition.y, currentPosition.z);
+                camera.lookAt(0, 0.7, -0.5);
+            })
+            .start();
     }
+    
 
     updatePartColor(part, color) {
         this.scene.traverse((child) => {

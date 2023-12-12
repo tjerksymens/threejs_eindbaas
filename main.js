@@ -5,6 +5,7 @@ import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Shoe } from './classes/Shoe.js';
 import { Configurator } from './classes/Configurator';
+import * as TWEEN from '@tweenjs/tween.js';
 
 const draco = new DRACOLoader();
 draco.setDecoderConfig({ type: 'js' });
@@ -81,6 +82,9 @@ controls.target.set(0, 0.7, -0.5);
 
 function animate() {
 	requestAnimationFrame( animate );
+
+    TWEEN.update();
+
 	renderer.render( scene, camera );
 }
 
