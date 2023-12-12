@@ -13,6 +13,7 @@ draco.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xffffff);
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+scene.camera = camera;
 
 // Get the canvasContainer div
 const canvasContainer = document.getElementById('canvasContainer');
@@ -71,10 +72,11 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.25;; 
 
-controls.target.set(0, 0.7, -0.5);
-
-camera.position.z = 1.5;
 camera.position.y = 0.7;
+camera.position.z = 1.5;
+camera.lookAt(0, 0.7, -0.5);
+
+controls.target.set(0, 0.7, -0.5);
 
 
 function animate() {
