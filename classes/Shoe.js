@@ -1,3 +1,4 @@
+import * as TWEEN from '@tweenjs/tween.js';
 import * as THREE from 'three';
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
@@ -14,7 +15,7 @@ export class Shoe {
     dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
 
     const gltfLoader = new GLTFLoader();
-    gltfLoader.setDRACOLoader(dracoLoader); // Set DRACOLoader instance
+    gltfLoader.setDRACOLoader(dracoLoader);
     
     gltfLoader.load("/models/shoe.glb", (gltf) => {
       gltf.scene.position.set(-0.2, 0.4, -0.5);
@@ -27,7 +28,6 @@ export class Shoe {
 
       shoe.traverse((child) => {
         if (child.isMesh) {
-          console.log(child.name);
           this.setMeshProperties(child);
         }
       });
@@ -47,9 +47,7 @@ export class Shoe {
         mesh.material.color.set("#ffffff");
         break;
     }
-    // Set up casting shadows for meshes
     mesh.castShadow = true;
     mesh.receiveShadow = true;
   }
-  
 }

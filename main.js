@@ -89,3 +89,65 @@ function animate() {
 }
 
 animate();
+
+const orderBtn = document.getElementById('orderBtn');
+
+orderBtn.addEventListener('click', () => {
+    // Get the current configuration
+    const currentConfiguration = getCurrentConfiguration();
+    console.log(currentConfiguration);
+
+    const shoeName = 'Costum Shoe';
+    const price = parseFloat(document.getElementById('price').innerText.replace(',', '.'));
+    const selectedSize = document.getElementById('size').value;
+    // Send the order to the API
+    sendOrderToApi(currentConfiguration, shoeName, price, selectedSize);
+});
+
+function getCurrentConfiguration() {
+    const configuration = {};
+
+    // Iterate through all the parts
+    configurator.parts.forEach((part) => {
+        // Get the current color of the part
+        const currentColor = getCurrentColor(part);
+        configuration[part] = currentColor;
+    });
+
+    return configuration;
+};
+
+function getCurrentColor(part) {
+    let color;
+    scene.traverse((child) => {
+      if (child.isMesh && child.name === part) {
+        color = child.material.color.getHex();
+      }
+    });
+  
+    // Convert the color to hex
+    const hexColor = '#' + color.toString(16).padStart(6, '0');
+    return hexColor;
+  }
+
+function sendOrderToApi(configuration, shoeName, price, selectedSize) {
+    // Perform an HTTP request (e.g., using fetch) to send the configuration to your Node.js API
+    fetch('http://localhost:3000/api/v1/shoes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        name: shoeName, 
+        configuration,
+        price,
+        size: selectedSize,}),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Order placed successfully:', data);
+      })
+      .catch((error) => {
+        console.error('Error placing order:', error);
+      });
+}

@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 import * as TWEEN from '@tweenjs/tween.js';
 
 export class Configurator {
@@ -10,7 +11,7 @@ export class Configurator {
 
         this.colors = {
         'White': '#ffffff',
-        'Black': '#222222',
+        'Black': '#333333',
         'Purple': '#a16d9a',
         'Pink': '#edc1c2',
         'Orange': '#f7704b',
@@ -124,7 +125,6 @@ export class Configurator {
             })
             .start();
     }
-    
 
     updatePartColor(part, color) {
         this.scene.traverse((child) => {

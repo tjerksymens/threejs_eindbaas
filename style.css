@@ -96,13 +96,69 @@ h1 {
 .configurator {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
 }
 
 #colorContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
+}
+
+.price {
+  font-size: 1.5em;
+  font-family: Helvetica, sans-serif;
+  font-weight: normal;
+  line-height: 1.2em;
+  margin-top: 1.3em;
+  text-transform: uppercase;
+  display: block;
+}
+
+.tax {
+  font-size: 0.7em;
+  margin-top: 0.5em;
+  font-family: Helvetica, sans-serif;
+  font-weight: normal;
+  display: block;
+}
+
+.size {
+  font-size: 1.2em;
+  font-family: Helvetica, sans-serif;
+  font-weight: normal;
+  margin-top: 1.3em;
+  display: block;
+}
+
+#size {
+  width: 291px;
+  margin-top: 0.5em;
+  font-size: 1em;
+  font-family: Helvetica, sans-serif;
+  font-weight: normal;
+  line-height: 1.2em;
+  text-transform: uppercase;
+  padding: 10px 10px;
+  border: 1px solid #888888;
+
+}
+
+
+#orderBtn {
+  margin-top: 2em;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 1em;
+  font-family: Helvetica, sans-serif;
+  font-weight: normal;
+  line-height: 1.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 10px 20px;
+  width: 291px;
+  border: none;
+  display: block;
 }
 
 footer {
