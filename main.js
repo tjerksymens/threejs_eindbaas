@@ -132,7 +132,7 @@ function getCurrentColor(part) {
 
 function sendOrderToApi(configuration, shoeName, price, selectedSize) {
     // Perform an HTTP request (e.g., using fetch) to send the configuration to your Node.js API
-    fetch('http://localhost:3000/api/v1/shoes', {
+    fetch('https://dev5-eindbaas-nodejs-api.onrender.com/api/v1/shoes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
