@@ -7,6 +7,52 @@ import { Shoe } from './classes/Shoe.js';
 import { Configurator } from './classes/Configurator';
 import * as TWEEN from '@tweenjs/tween.js';
 
+let captureSnapshot = () => {
+    const canvasContainer = document.getElementById('canvasContainer');
+
+    // Create a new renderer and set its size
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(1000, 1000);
+    renderer.shadowMap.enabled = true;
+
+    // Create a new scene and camera
+    const snapshotScene = new THREE.Scene();
+    snapshotScene.background = new THREE.Color(0xffffff);
+    const snapshotCamera = new THREE.PerspectiveCamera(75, 1000 / 1000, 0.1, 1000);
+    snapshotScene.camera = snapshotCamera;
+
+    snapshotCamera.position.set(0, 0.7, 1.5);
+    snapshotCamera.lookAt(0, 0.7, -0.5);
+
+    // Clone the objects from the original scene to the snapshot scene
+    scene.children.forEach((child) => {
+        const clone = child.clone(true);
+        snapshotScene.add(clone);
+    });
+    
+    // Set up the renderer for the snapshot scene
+    const snapshotCanvas = renderer.domElement;
+    canvasContainer.appendChild(snapshotCanvas);
+
+    // Render the snapshot scene
+    renderer.render(snapshotScene, snapshotCamera);
+
+    // Get the data URL of the current canvas state
+    const dataURL = snapshotCanvas.toDataURL("image/png");
+
+    // Open the data URL in a new tab or window
+    const newTab = window.open();
+    newTab.document.write(`<img src="${dataURL}" alt="Snapshot" />`);
+
+    // Download the data URL as a file
+    const downloadLink = document.createElement('a');
+    downloadLink.href = dataURL;
+    downloadLink.download = 'SwearCostomShoeSnapshot.png';
+    downloadLink.click();
+};
+
+document.getElementById('captureBtn').addEventListener('click', captureSnapshot);
+
 const draco = new DRACOLoader();
 draco.setDecoderConfig({ type: 'js' });
 draco.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
@@ -96,12 +142,6 @@ orderBtn.addEventListener('click', () => {
     // Get the current configuration
     const currentConfiguration = getCurrentConfiguration();
     console.log(currentConfiguration);
-
-    const shoeName = 'Costum Shoe';
-    const price = parseFloat(document.getElementById('price').innerText.replace(',', '.'));
-    const selectedSize = document.getElementById('size').value;
-    // Send the order to the API
-    sendOrderToApi(currentConfiguration, shoeName, price, selectedSize);
 });
 
 function getCurrentConfiguration() {
@@ -129,25 +169,3 @@ function getCurrentColor(part) {
     const hexColor = '#' + color.toString(16).padStart(6, '0');
     return hexColor;
   }
-
-function sendOrderToApi(configuration, shoeName, price, selectedSize) {
-    // Perform an HTTP request (e.g., using fetch) to send the configuration to your Node.js API
-    fetch('https://dev5-eindbaas-nodejs-api.onrender.com/api/v1/shoes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ 
-        name: shoeName, 
-        configuration,
-        price,
-        size: selectedSize,}),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Order placed successfully:', data);
-      })
-      .catch((error) => {
-        console.error('Error placing order:', error);
-      });
-}
